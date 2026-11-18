@@ -1,0 +1,47 @@
+#include <iostream>
+using namespace std;
+
+class Student {
+public:
+    string name;
+
+    Student() {
+        name = "Nayan";
+        cout << "Default Constructor" << endl;
+    }
+
+    Student(string n) {
+        name = n;
+        cout << "Parameterized Constructor" << endl;
+    }
+
+    Student(const Student &s) {
+        name = s.name;
+        cout << "Copy Constructor" << endl;
+    }
+
+    Student(Student &&s) noexcept {
+        name = move(s.name);
+        cout << "Move Constructor" << endl;
+    }
+
+    void display() {
+        cout << "Name: " << name << endl;
+    }
+};
+
+int main() {
+    Student s1;
+    s1.display();
+
+    Student s2("Rahul");
+    s2.display();
+
+    Student s3(s2);
+    s3.display();
+
+    Student s4(move(s2));
+    s4.display();
+
+    return 0;
+}
