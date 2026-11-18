@@ -1,0 +1,61 @@
+#include <iostream>
+using namespace std;
+
+class Shape {
+public:
+    virtual double area() = 0;
+};
+
+class Circle : public Shape {
+public:
+    double r;
+    Circle(double x) {
+        r = x;
+    }
+    double area() {
+        return 3.14 * r * r;
+    }
+};
+
+class Rectangle : public Shape {
+public:
+    double l, b;
+    Rectangle(double x, double y) {
+        l = x;
+        b = y;
+    }
+    double area() {
+        return l * b;
+    }
+};
+
+class Triangle : public Shape {
+public:
+    double b, h;
+    Triangle(double x, double y) {
+        b = x;
+        h = y;
+    }
+    double area() {
+        return 0.5 * b * h;
+    }
+};
+
+int main() {
+    Circle c(5);
+    Rectangle r(4, 6);
+    Triangle t(3, 8);
+
+    Shape *s;
+
+    s = &c;
+    cout << "Circle Area: " << s->area() << endl;
+
+    s = &r;
+    cout << "Rectangle Area: " << s->area() << endl;
+
+    s = &t;
+    cout << "Triangle Area: " << s->area() << endl;
+
+    return 0;
+}
