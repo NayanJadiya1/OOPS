@@ -1,0 +1,41 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+int main() {
+    fstream file("student.csv", ios::in | ios::out | ios::trunc);
+
+    if (!file) {
+        cout << "File Error";
+        return 1;
+    }
+
+    file << "101,Nayan,85\n";
+    file << "102,Rahul,90\n";
+    file << "103,Aman,75\n";
+
+    cout << "File Position: " << file.tellp() << endl;
+
+    file.seekg(0);
+
+    cout << "\nStudent Records:\n";
+
+    string line;
+    while (getline(file, line)) {
+        cout << line << endl;
+    }
+
+    cout << "Read Position: " << file.tellg() << endl;
+
+    file.clear();
+    file.seekp(0, ios::end);
+
+    file << "104,Rohan,80\n";
+
+    cout << "Write Position: " << file.tellp() << endl;
+
+    file.close();
+
+    return 0;
+}
