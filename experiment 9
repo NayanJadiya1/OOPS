@@ -1,0 +1,48 @@
+#include <iostream>
+#include <exception>
+using namespace std;
+
+class BankingException : public exception {};
+
+class InsufficientBalance : public BankingException {};
+class InvalidAmount : public BankingException {};
+
+class Bank {
+    double balance = 5000;
+
+public:
+    void withdraw(double amount) {
+        if (amount <= 0)
+            throw InvalidAmount();
+
+        if (amount > balance)
+            throw InsufficientBalance();
+
+        balance -= amount;
+        cout << "Withdrawal Successful" << endl;
+        cout << "Remaining Balance: " << balance << endl;
+    }
+};
+
+int main() {
+    Bank b;
+    double amount;
+
+    cout << "Enter withdrawal amount: ";
+    cin >> amount;
+
+    try {
+        b.withdraw(amount);
+    }
+    catch (InvalidAmount &) {
+        cout << "Invalid Amount" << endl;
+    }
+    catch (InsufficientBalance &) {
+        cout << "Insufficient Balance" << endl;
+    }
+    catch (BankingException &) {
+        cout << "Banking Error" << endl;
+    }
+
+    return 0;
+}
