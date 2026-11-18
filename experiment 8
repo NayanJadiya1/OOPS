@@ -1,0 +1,45 @@
+#include <iostream>
+#include <vector>
+#include <map>
+#include <unordered_map>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    vector<int> marks = {75, 90, 65, 85, 70};
+
+    map<string, int> students;
+    students["Aman"] = 75;
+    students["Rahul"] = 90;
+    students["Nayan"] = 85;
+
+    unordered_map<int, string> result;
+    result[75] = "Aman";
+    result[90] = "Rahul";
+    result[85] = "Nayan";
+
+    sort(marks.begin(), marks.end());
+
+    cout << "Sorted Marks: ";
+    for (int m : marks)
+        cout << m << " ";
+
+    auto it = find_if(marks.begin(), marks.end(),
+                      [](int m) { return m > 80; });
+
+    if (it != marks.end())
+        cout << "\nFirst mark above 80: " << *it;
+
+    transform(marks.begin(), marks.end(), marks.begin(),
+              [](int m) { return m + 5; });
+
+    cout << "\nUpdated Marks: ";
+    for (int m : marks)
+        cout << m << " ";
+
+    cout << "\nStudent Marks:\n";
+    for (auto s : students)
+        cout << s.first << ": " << s.second << endl;
+
+    return 0;
+}
